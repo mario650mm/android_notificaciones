@@ -17,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    defaultConfig{
+    defaultConfig {
         applicationId "com.example.vzert14.notificacionesf"
     }
 }
@@ -27,19 +27,24 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    // Firebase library Analitcs
+    // Firebase database
+    // Firebase storage
+    // Firebase auth
+    // Firebase cloud message (notifications)
+    compile 'com.google.firebase:firebase-auth:10.2.6' // Autenticación
+    // Librerias de firebase: https://firebase.google.com/docs/android/setup
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.google.firebase:firebase-core:10.2.6' // Firebase library Analitcs
-    compile 'com.google.firebase:firebase-database:10.2.6' // Firebase database
-    compile 'com.google.firebase:firebase-storage:10.2.6' // Firebase storage
-    compile 'com.google.firebase:firebase-auth:10.2.6' // Firebase auth
-    compile 'com.google.firebase:firebase-messaging:10.2.6' // Firebase cloud message (notifications)
-    compile 'com.google.firebase:firebase-auth:10.2.6' // Autenticación
+    compile 'com.google.firebase:firebase-core:10.2.6'
+    compile 'com.google.firebase:firebase-database:10.2.6'
+    compile 'com.google.firebase:firebase-storage:10.2.6'
+    compile 'com.google.firebase:firebase-auth:10.2.6'
+    compile 'com.google.firebase:firebase-messaging:10.2.6'
     compile 'com.google.firebase:firebase-appindexing:10.2.6'
     compile 'com.google.android.gms:play-services-location:10.2.6'
     compile 'com.google.android.gms:play-services-places:10.2.6'
     testCompile 'junit:junit:4.12'
-    // Librerias de firebase: https://firebase.google.com/docs/android/setup
 }
 
 // ADD THIS AT THE BOTTOM

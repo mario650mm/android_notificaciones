@@ -1,16 +1,20 @@
 package com.example.vzert14.notificacionesf;
 
+import android.content.Intent;
 import android.provider.Settings.Secure;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -23,11 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-/*import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;*/
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class MainActivity extends AppCompatActivity {
-    //private FirebaseAnalytics mFirebaseAnalytics;
+    FirebaseAnalytics mFirebaseAnalytics;
     private Toast toast;
     DatabaseReference db;
     private static final String TAG = "MainActivity";
@@ -36,25 +40,25 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> lista = new ArrayList<>();
     ArrayList<Notification> notificacionesArray = new ArrayList<>();
     ArrayAdapter<Notification> adaptadorNotificacion;
-
-    //ArrayAdapter<String> adaptadorNotificacion
+    ImageButton btnAgregar;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listaNotificaciones = (ListView) findViewById(R.id.listaNotificaciones);
+        btnAgregar = (ImageButton) findViewById(R.id.btnAgregar);
         db = FirebaseDatabase.getInstance().getReference();
-        listaNotificaciones.setAdapter(adaptadorNotificacion);
 
         //adaptadorNotificacion = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,lista);
 
         //adaptadorNotificacion = new ArrayAdapter<Notification>(this,android.R.layout.simple_dropdown_item_1line,lista);
-        listaNotificaciones.setAdapter(adaptadorNotificacion);
+        ///listaNotificaciones.setAdapter(adaptadorNotificacion);
 
 
-        /*String android_id = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
-        toast = Toast.makeText(getApplicationContext(),"android_id: "+android_id,Toast.LENGTH_LONG);
-        toast.show();*/
+
+
+        //listaNotificaciones.setAdapter(adaptadorNotificacion);
 
         // Usuarios en firebase - https://firebase.google.com/docs/auth/android/password-auth#create_a_password-based_account
         authListener = FirebaseAuth.getInstance();
@@ -62,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
             authListener.signInWithEmailAndPassword("mario650m@gmail.com", "$vzertwifi$").addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    toast = Toast.makeText(getApplicationContext(), "login correcto", Toast.LENGTH_LONG);
-                    toast.show();
+                    /*toast = Toast.makeText(getApplicationContext(), "login correcto", Toast.LENGTH_LONG);
+                    toast.show();*/
                 }
             });
         } catch (Exception e) {
@@ -98,23 +102,32 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this,AddNotificacion.class);
+                startActivity(intent);
+            }
+        });
+
         //getNotificaciones();
 
-        //agregarNotificacion("titulo 1","Cuerpo 1");
+        ///agregarNotificacion("Notificación de prueba","Hola, cómo estás?");
 
 
     }
 
     //Cerrar Sesión en Firebase
-    // FirebaseAuth.getInstance().signOut();º
+    // FirebaseAuth.getInstance().signOut();
 
     private void getNotificaciones() {
         ValueEventListener notificationListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Notification notification = dataSnapshot.getValue(Notification.class);
-                /*toast = Toast.makeText(getApplicationContext(),notification.toString(),Toast.LENGTH_LONG);
-                toast.show();*/
+                toast = Toast.makeText(getApplicationContext(),notification.toString(),Toast.LENGTH_LONG);
+                toast.show();
             }
 
             @Override

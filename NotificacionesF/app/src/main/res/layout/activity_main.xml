@@ -16,6 +16,20 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <ImageButton
+                android:id="@+id/btnAgregar"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_add"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal">
             <ListView
@@ -28,5 +42,6 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </android.support.constraint.ConstraintLayout>
