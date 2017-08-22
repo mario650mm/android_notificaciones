@@ -46,7 +46,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listaNotificaciones = (ListView) findViewById(R.id.listaNotificaciones);
+        /*authListener.signInWithEmailAndPassword("vzert@gmail.com", "$vzertwifi$").addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                toast = Toast.makeText(getApplicationContext(), "login correcto", Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });*/
+        System.out.println("MainActivity.oncreate "+FirebaseInstanceId.getInstance().getToken());
+        /*listaNotificaciones = (ListView) findViewById(R.id.listaNotificaciones);
         btnAgregar = (ImageButton) findViewById(R.id.btnAgregar);
         db = FirebaseDatabase.getInstance().getReference();
 
@@ -63,18 +71,18 @@ public class MainActivity extends AppCompatActivity {
         // Usuarios en firebase - https://firebase.google.com/docs/auth/android/password-auth#create_a_password-based_account
         authListener = FirebaseAuth.getInstance();
         try {
-            authListener.signInWithEmailAndPassword("mario650m@gmail.com", "$vzertwifi$").addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            authListener.signInWithEmailAndPassword("vzert@gmail.com", "$vzertwifi$").addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    /*toast = Toast.makeText(getApplicationContext(), "login correcto", Toast.LENGTH_LONG);
-                    toast.show();*/
+                    toast = Toast.makeText(getApplicationContext(), "login correcto", Toast.LENGTH_LONG);
+                    toast.show();
                 }
             });
         } catch (Exception e) {
             toast = Toast.makeText(getApplicationContext(), "error " + e.getMessage(), Toast.LENGTH_LONG);
             toast.show();
         }
-        db.orderByChild("titulo").limitToLast(5).addChildEventListener(new ChildEventListener() {
+        db.orderByChild("titulo").limitToLast(1).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Notification value = dataSnapshot.getValue(Notification.class);
@@ -109,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this,AddNotificacion.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
         //getNotificaciones();
 
@@ -121,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
     //Cerrar Sesión en Firebase
     // FirebaseAuth.getInstance().signOut();
 
-    private void getNotificaciones() {
+    /*private void getNotificaciones() {
         ValueEventListener notificationListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -145,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Notificaciones/" + clave, valoresN);
         db.updateChildren(childUpdates);
-    }
+    }*/
 
 
 }
